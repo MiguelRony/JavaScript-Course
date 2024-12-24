@@ -39,7 +39,7 @@ html{
 }
 
 .card{
-    min-height: 250px;
+    min-height: 350px;
     background-color: #e4d594;
     border: black;
     border-radius: 10px;
@@ -53,12 +53,75 @@ html{
 
 .img{
     background-color: rgb(101, 140, 143);
-    min-height: 75%;
+    min-height: 65%;
     border-radius: 10px;
     border: black;
 }
 
 .info{
     text-align: center;
+    height: 60px;
 }
 
+dialog{
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    align-self: center;
+    justify-self: center ;
+    width: 300px;
+    height: 400px;
+    transition: 0.2s ease-in-out;
+}
+
+.form-group{
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.form-group label{
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="number"]{
+    width: 100%;
+    padding: 10px;
+}
+
+.form-group.checkbox{
+    display: flex;
+    align-items: center;
+}
+
+.checkbox input[type="checkbox"]{
+    margin-right: 10px;
+}
+
+.add,
+.cancel{
+    width: 80px;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 1.2em;
+    opacity: 0.8;
+}
+
+.add{
+    background-color: #4beb9b;
+}
+
+.cancel{
+    background-color: rgb(238, 94, 94);
+}
+
+.add:hover,
+.cancel:hover{
+    opacity: 1;
+}
+
+.card button{
+    font-size: 0.9em;
+}

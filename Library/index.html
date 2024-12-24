@@ -12,6 +12,30 @@
             <button class="btn" id="newBook">New Book</button>
         </div>
         <div class="books-section" id="books-section"></div>
+        <dialog>
+            <p>New Book Information</p>
+            <form method="dialog" id="bookForm">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" placeholder="title" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author" placeholder="author" required>
+                </div>
+                <div class="form-group">
+                    <label for="pages">Pages</label>
+                    <input type="number" name="pages" id="pages" required>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" name="read" id="read">
+                    <label for="read">is the book Read</label>
+                </div>
+                <button class="add" id="add">Add</button>
+                <button class="cancel" id="cancel">Cancel</button>
+                
+            </form>
+        </dialog>
     </div>
     <script src="script.js"></script>
 </body>
