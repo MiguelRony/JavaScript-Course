@@ -11,6 +11,10 @@ function Book(title, author, pages, isRead){
     }
 }
 
+Book.prototype.changeReadStatus = function(){
+    this.isRead ? this.isRead = false : this.isRead = true;
+}
+
 function addBookToLibrary(title, author, pages, isRead){
     myLibrary.push(new Book(title, author, pages, isRead))
 }
@@ -19,23 +23,30 @@ addBookToLibrary('Harry Potter','Me', 1234, false);
 addBookToLibrary('Bible','Jesus', 2000,false);
 addBookToLibrary('Don Quixote','Miguel de Cervantes', 4321,false);
 addBookToLibrary("Alice's Adventures in Wonderland",'Lewis Carroll', 342,false);
-addBookToLibrary("Gulliver's Travels",'Jonathan Swift', 500,false);
+addBookToLibrary("Gulliver's Travels",'Jonathan Swift', 500,true);
 addBookToLibrary('Oliver Twist','Charles Dickens', 784,false);
 
 const container = document.getElementById('books-section');
 
-function createCard(book){
+function createCard(book, index){
     const card = document.createElement('div');
     const img = document.createElement('div');
     const info = document.createElement('div');
     const btns = document.createElement('div');
     const del = document.createElement('button');
+    const check = document.createElement('input');
+    const label = document.createElement('label');
+    const readLabel = document.createElement('span');
 
     del.addEventListener('click', () => {
-        const index = card.getAttribute('data-index');
         myLibrary.splice(index, 1);
         container.replaceChildren();
         renderCards();
+    })
+
+    check.addEventListener('change', () => {
+        book.changeReadStatus();
+        book.isRead ? readLabel.textContent = 'read' : readLabel.textContent = 'not read';
     })
 
     card.className = 'card';
@@ -43,18 +54,29 @@ function createCard(book){
     info.className = 'info'
     del.className = 'cancel'
     del.textContent = "Delete";
+    btns.className = 'btns';
+    check.type = 'checkbox';
+    check.id = `read${index}`;
+    check.name = `read${index}`;
+    label.htmlFor = `read${index}`;
+    label.className = "button";
+    check.checked = book.isRead;
+    readLabel.textContent = book.isRead ? 'read' : 'not read';
 
     info.textContent = book.info();
     card.appendChild(img);
     card.appendChild(info);
     btns.appendChild(del);
+    btns.appendChild(check);
+    btns.appendChild(label);
+    btns.appendChild(readLabel);
     card.appendChild(btns);
     return card;
 }
 
 function renderCards(){
     myLibrary.map((e, index) => {
-        const card = createCard(e);
+        const card = createCard(e, index);
         card.setAttribute('data-index', index)
         container.appendChild(card);
     });
