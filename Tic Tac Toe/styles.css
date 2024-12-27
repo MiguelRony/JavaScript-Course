@@ -24,7 +24,7 @@
     color: black;
     font-weight: bold;
     font-family: 'newFont';
-    width: 35vw;
+    width: 650px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -51,8 +51,8 @@ div.selected#Player2{
 
 .container{
     background-color: #496391;
-    width: 35vw;
-    height: 80vh;
+    width: 650px;
+    height: 650px;
     border-radius: 5%;
 
     display: grid;
