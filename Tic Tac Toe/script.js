@@ -39,7 +39,6 @@ function Gameboard(){
     const checkWinner = () => {
         const lastModifiedRow = lastMovement[0];
         const lastModifiedColumn = lastMovement[1];
-        console.log(lastMovement)
         
         // Check Row
         if (
@@ -53,7 +52,6 @@ function Gameboard(){
 
         //Check Diagonals
         if (lastModifiedRow === lastModifiedColumn || lastModifiedRow % 2 === 0 && lastModifiedColumn % 2 === 0){
-            console.log('Checking')
             if(board[1][1].getValue() === 0 ) return false
 
             if(
@@ -112,8 +110,8 @@ function GameController(playerOneName, playerTwoName){
     const p2 = document.querySelector('#Player2');
     
     const addNamesToView = () => {
-        p1.textContent = p1.textContent + ` ${players[0].name}`;
-        p2.textContent = p2.textContent + ` ${players[1].name}`;
+        p1.textContent = 'Player 1: ' + ` ${players[0].name}`;
+        p2.textContent = 'Player 2:' + ` ${players[1].name}`;
     }
 
     addNamesToView();
@@ -143,9 +141,6 @@ function GameController(playerOneName, playerTwoName){
         
         if(gameCompleted) return;
 
-        console.log(
-            `${activePlayer.name} selecting row ${row} and column ${column}...`
-        );
         if(!board.addFigure(row, column, activePlayer)) return;
 
         printBoardStatus();
@@ -154,18 +149,19 @@ function GameController(playerOneName, playerTwoName){
         if (gameFinished || movementsMade === 9){
             if(gameFinished){
                 gameCompleted = true;
-                console.log(`${getActivePlayer().name} won!`)
                 const notif = document.createElement('div');
                 notif.className = 'notif';
                 notif.textContent = `${getActivePlayer().name} won!`;
                 document.querySelector('.container').appendChild(notif);
             }else{
-                console.log("It's a draw!")
+                const notif = document.createElement('div');
+                notif.className = 'notif';
+                notif.textContent = "It's a draw!";
+                document.querySelector('.container').appendChild(notif);
             }
             return
         }
         switchPlayerTurn();
-        console.log(`${getActivePlayer().name}'s turn.`)
     };
 
     const resetGame = () => {
@@ -173,9 +169,10 @@ function GameController(playerOneName, playerTwoName){
         gameCompleted = false;
         activePlayer = players[0];
         printBoardStatus();
-        console.log(`${getActivePlayer().name}'s turn.`)
+        p2.classList.remove('selected');
+        p1.classList.add('selected');
         const notif = document.querySelector('.notif');
-        if(notif !== undefined){
+        if(notif !== null){
             document.querySelector('.container').removeChild(notif);
         }
     }
@@ -187,14 +184,15 @@ function GameController(playerOneName, playerTwoName){
             e.textContent = boardCells[index] === 0 ? '' : boardCells[index]
             if(e.textContent === 'X'){
                 cellsNodes[index].classList.add('x-move')
+                cellsNodes[index].classList.remove('o-move')
             }else if(e.textContent === 'O'){
                 cellsNodes[index].classList.add('o-move')
+                cellsNodes[index].classList.remove('x-move')
             }
         });
     };
 
     printBoardStatus();
-    console.log(`${getActivePlayer().name}'s turn.`)
 
     return{
         playRound,
@@ -204,7 +202,7 @@ function GameController(playerOneName, playerTwoName){
 }
 
 function startGame(playerOneName = 'Player One', playerTwoName = 'Player Two'){
-    const game = GameController(playerOneName, playerTwoName);
+    let game = GameController(playerOneName, playerTwoName);
     const cellsNodes = document.getElementsByClassName('cell');
     const cells = Array.from(cellsNodes);
     cells.map((e, index) => {
@@ -216,13 +214,31 @@ function startGame(playerOneName = 'Player One', playerTwoName = 'Player Two'){
         })
     });
 
-    const resetGame = () => {
-        game.resetGame();
-    };
+    const rstBtn = document.querySelector('#rstGame');
+    rstBtn.addEventListener('click', () => {
+        game.resetGame()
+    })
 
-    return {
-        resetGame
-    }
+    const newGame = document.querySelector('#newGame');
+    const form = document.querySelector('form');
+    const overlay = document.querySelector('.overlay');
+    const dialog = document.querySelector('dialog');
+    newGame.addEventListener('click', () => {
+        dialog.showModal();
+        overlay.style.display = 'block';
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        game = GameController(form.elements['P1'].value, form.elements['P2'].value);
+        const notif = document.querySelector('.notif');
+        if(notif !== null){
+            document.querySelector('.container').removeChild(notif);
+        }
+        dialog.close();
+        overlay.style.display = 'none';
+    });
 };
 
 const newGame = startGame();

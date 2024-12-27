@@ -8,21 +8,42 @@
 </head>
 <body>
     <div class="main">
-        <div class="gameInfo">
-            <div id="Player1">Player 1:</div>
-            <div id="Player2">Player 2:</div>
+        <div class="left-side">
+            <div class="gameInfo">
+                <div id="Player1">Player 1:</div>
+                <div id="Player2">Player 2:</div>
+            </div>
+            <div class="container">
+                <div class="cell top left"></div>
+                <div class="cell top"></div>
+                <div class="cell top right"></div>
+                <div class="cell left"></div>
+                <div class="cell"></div>
+                <div class="cell right"></div>
+                <div class="cell bottom left"></div>
+                <div class="cell bottom "></div>
+                <div class="cell bottom right"></div>
+            </div>
         </div>
-        <div class="container">
-            <div class="cell top left"></div>
-            <div class="cell top"></div>
-            <div class="cell top right"></div>
-            <div class="cell left"></div>
-            <div class="cell"></div>
-            <div class="cell right"></div>
-            <div class="cell bottom left"></div>
-            <div class="cell bottom "></div>
-            <div class="cell bottom right"></div>
+        <div class="right-side">
+            <img class="img" src="./utils/images/tic-tac-toe.jpg" alt="">
+            <button class="btn" id="newGame">New Game</button>
+            <button class="btn" id="rstGame">Reset Game</button>
         </div>
+        <div class="overlay"></div>
+        <dialog>
+            <form method="dialog">
+                <div class="form-group">
+                    <label for="Player1Name">Player 1</label>
+                    <input type="text" id="Player1Name" name="P1" required>
+                </div>
+                <div class="form-group">
+                    <label for="Player2Name">Player 2</label>
+                    <input type="text" id="Player2Name" name="P2" required>
+                </div>
+                <button class="btn" id="play">Play</button>
+            </form>
+        </dialog>
     </div>
     <script src="script.js"></script>
 </body>

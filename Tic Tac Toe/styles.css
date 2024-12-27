@@ -14,10 +14,102 @@
     width: 100vw;
     height: 100vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.left-side{
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
+}
+
+.right-side{
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.img{
+    width: 100%;
+    padding-bottom: 60px;
+}
+
+.btn{
+    width: 80%;
+    height: 50px;
+    border-radius: 20px;
+    box-shadow: -3px -3px 10px #bbb;
+}
+
+#newGame{
+    background-color: #2fc8e0;
+    color: white;
+    font-family: 'newFont';
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#rstGame{
+    background-color: #2fc8e0;
+    color: white;
+    font-family: 'newFont';
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 100;
+    display: none; 
+  }
+
+dialog{
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    align-self: center;
+    justify-self: center ;
+    transition: 0.2s ease-in-out;
+    box-shadow: -3px -3px 10px #bbb;
+    border-radius: 10px;
+}
+
+form{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 10px;
+}
+
+form button{
+    margin-top: 40px;
+}
+
+.form-group{
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.form-group label{
+    margin-bottom: 5px;
+    color: #555;
 }
 
 .gameInfo{
@@ -66,7 +158,7 @@ div.selected#Player2{
 }
 
 .cell{
-    background-color: #fff;
+    background-color: #012433;
     width: 100%;
     height: 100%;
     text-align: center;
@@ -77,12 +169,12 @@ div.selected#Player2{
 
 .x-move{
     color: #e6a827;
-    text-shadow: -4px -4px 10px #333
+    text-shadow: -4px -4px 10px #fff
 }
 
 .o-move{
     color: #e63d27;
-    text-shadow: -4px -4px 10px #333
+    text-shadow: -4px -4px 10px #fff
 }
 
 .left{
@@ -106,10 +198,11 @@ div.cell:hover{
 }
 
 .notif{
+    color: #fff;
     position: absolute;
     font-size: 4em;
     /* opacity: 0.6; */
     font-family: 'newFont';
-    top: 150px;
+    top: 130px;
     text-shadow: -8px -8px 10px #333, 8px 8px 10px #bbb;
 }
