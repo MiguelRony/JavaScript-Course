@@ -95,6 +95,7 @@ function Cell(){
 
 function GameController(playerOneName, playerTwoName){
     const board = Gameboard();
+    let gameCompleted = false;
 
     const players = [
         {
@@ -107,10 +108,29 @@ function GameController(playerOneName, playerTwoName){
         }
     ];
 
+    const p1 = document.querySelector('#Player1');
+    const p2 = document.querySelector('#Player2');
+    
+    const addNamesToView = () => {
+        p1.textContent = p1.textContent + ` ${players[0].name}`;
+        p2.textContent = p2.textContent + ` ${players[1].name}`;
+    }
+
+    addNamesToView();
+
     let activePlayer = players[0];
+    p1.classList.add('selected');
 
     const switchPlayerTurn = () => {
-        activePlayer = activePlayer === players[0] ? players[1] : players[0];
+        if (activePlayer === players[0]){
+            activePlayer = players[1];
+            p1.classList.remove('selected');
+            p2.classList.add('selected');
+        }else{
+            activePlayer = players[0];
+            p2.classList.remove('selected');
+            p1.classList.add('selected');
+        }
     };
 
     const getActivePlayer = () => activePlayer;
@@ -120,6 +140,9 @@ function GameController(playerOneName, playerTwoName){
     }
 
     const playRound = (row, column) => {
+        
+        if(gameCompleted) return;
+
         console.log(
             `${activePlayer.name} selecting row ${row} and column ${column}...`
         );
@@ -130,7 +153,12 @@ function GameController(playerOneName, playerTwoName){
         const movementsMade = board.getTotalMovements();
         if (gameFinished || movementsMade === 9){
             if(gameFinished){
+                gameCompleted = true;
                 console.log(`${getActivePlayer().name} won!`)
+                const notif = document.createElement('div');
+                notif.className = 'notif';
+                notif.textContent = `${getActivePlayer().name} won!`;
+                document.querySelector('.container').appendChild(notif);
             }else{
                 console.log("It's a draw!")
             }
@@ -142,15 +170,27 @@ function GameController(playerOneName, playerTwoName){
 
     const resetGame = () => {
         board.resetBoard();
+        gameCompleted = false;
         activePlayer = players[0];
         printBoardStatus();
         console.log(`${getActivePlayer().name}'s turn.`)
+        const notif = document.querySelector('.notif');
+        if(notif !== undefined){
+            document.querySelector('.container').removeChild(notif);
+        }
     }
 
     const visualController = (boardCells) => {
         const cellsNodes = document.getElementsByClassName('cell');
         const cells = Array.from(cellsNodes);
-        cells.map((e, index) => e.textContent = boardCells[index] === 0 ? '' : boardCells[index] );
+        cells.map((e, index) => {
+            e.textContent = boardCells[index] === 0 ? '' : boardCells[index]
+            if(e.textContent === 'X'){
+                cellsNodes[index].classList.add('x-move')
+            }else if(e.textContent === 'O'){
+                cellsNodes[index].classList.add('o-move')
+            }
+        });
     };
 
     printBoardStatus();
@@ -175,6 +215,14 @@ function startGame(playerOneName = 'Player One', playerTwoName = 'Player Two'){
             
         })
     });
+
+    const resetGame = () => {
+        game.resetGame();
+    };
+
+    return {
+        resetGame
+    }
 };
 
 const newGame = startGame();

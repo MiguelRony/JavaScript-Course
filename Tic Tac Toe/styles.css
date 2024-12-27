@@ -4,18 +4,54 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: "newFont";
+    src: url(./utils/fonts/Oswald-VariableFont_wght.ttf);
+}
+
 .main{
     background-color: #445166;
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 20px;
+}
+
+.gameInfo{
+    color: black;
+    font-weight: bold;
+    font-family: 'newFont';
+    width: 35vw;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    justify-items: center;
+}
+
+.gameInfo div{
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 10px;
+    
+}
+
+div.selected#Player1{
+    background-color: #e6a827;
+    box-shadow: -3px -3px 10px #bbb;
+}
+
+div.selected#Player2{
+    background-color: #e63d27;
+    box-shadow: -3px -3px 10px #bbb;
 }
 
 .container{
     background-color: #496391;
-    width: 50vw;
+    width: 35vw;
     height: 80vh;
     border-radius: 5%;
 
@@ -25,6 +61,8 @@
     align-items: center;
     justify-items: center;
     padding: 30px;
+    box-shadow: -3px -3px 5px #bbb;
+    /* position: relative; */
 }
 
 .cell{
@@ -34,7 +72,17 @@
     text-align: center;
     align-content: center;
     font-size: 5em;
+    font-family: 'newFont';
+}
+
+.x-move{
     color: #e6a827;
+    text-shadow: -4px -4px 10px #333
+}
+
+.o-move{
+    color: #e63d27;
+    text-shadow: -4px -4px 10px #333
 }
 
 .left{
@@ -55,4 +103,13 @@
 
 div.cell:hover{
     cursor: pointer;
+}
+
+.notif{
+    position: absolute;
+    font-size: 4em;
+    /* opacity: 0.6; */
+    font-family: 'newFont';
+    top: 150px;
+    text-shadow: -8px -8px 10px #333, 8px 8px 10px #bbb;
 }
