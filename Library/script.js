@@ -1,19 +1,36 @@
 const myLibrary = [];
 
-function Book(title, author, pages, isRead){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
+// function Book(title, author, pages, isRead){
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.isRead = isRead;
     
-    this.info = function(){
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${ isRead ? 'read' : 'not read yet'}.`;
+//     this.info = function(){
+//         return `${this.title} by ${this.author}, ${this.pages} pages, ${ isRead ? 'read' : 'not read yet'}.`;
+//     }
+// }
+
+class Book{
+    constructor(title, author, pages, isRead){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+
+    changeReadStatus(){
+        this.isRead ? this.isRead = false : this.isRead = true;
+    }
+
+    info(){
+        return `${this.title} by ${this.author}, ${this.pages} pages, ${ this.isRead ? 'read' : 'not read yet'}.`;
     }
 }
 
-Book.prototype.changeReadStatus = function(){
-    this.isRead ? this.isRead = false : this.isRead = true;
-}
+// Book.prototype.changeReadStatus = function(){
+//     this.isRead ? this.isRead = false : this.isRead = true;
+// }
 
 function addBookToLibrary(title, author, pages, isRead){
     myLibrary.push(new Book(title, author, pages, isRead))
